@@ -12,6 +12,7 @@ Scene SystemはUnityにおけるシーンの管理に関する機能を提供す
 ### 特徴
 * SceneManagerを拡張した多機能なシーン管理用のAPI
 * Inspector上でシーンの参照を設定可能なSceneReferenceを追加
+* ロード画面を簡単に実装可能なLoadingScreenコンポーネント
 * マルチシーンの管理を効率的に行うSceneContainer
 * コルーチン・async/awaitに対応
 * UniRx/UniTaskに対応
@@ -168,7 +169,7 @@ public class SceneReferenceExample : MonoBehaviour
 }
 ```
 
-<img src="https://github.com/AnnulusGames/SceneSystem/blob/main/Assets/SceneSystem/Documentation~/img1.png" width="350">
+<img src="https://github.com/AnnulusGames/SceneSystem/blob/main/Assets/SceneSystem/Documentation~/img1.png" width="420">
 
 ## LoadSceneOperationHandle
 Scene Systemにおける非同期メソッドは全てLoadSceneOperationHandleという構造体を戻り値に持ちます。
@@ -246,7 +247,7 @@ Scene Systemでは、ロード画面を表示する機能としてLoadingScreen�
 LoadingScreenコンポーネントをカスタマイズすることで、独自のロード画面を作成できます。
 
 ### 設定項目
-* Skip Mode
+#### Skip Mode
 ロード完了時の挙動を設定します。
 
 |  SkipMode         |  設定時の挙動                                                  |
@@ -262,20 +263,20 @@ LoadingScreen loadingScreen;
 loadingScreen.AllowCompletion();
 ```
 
-* Minimum Loading Time
+#### Minimum Loading Time
 ロードにかかる最小限の時間を設定します。
 シーンのロードが完了しても、設定された時間の間はロードが行われているように見せかけることが可能です。
 
-* Destroy On Completed
+#### Destroy On Completed
 trueに設定した場合、シーン遷移が完了した後に自動でオブジェクトを削除します。
 
-* On Loading
+#### On Loading
 シーンのロード中に毎フレーム呼び出されます。
 
-* On Load Completed
+#### On Load Completed
 シーンのロードが完了した際に呼び出されます。この時点でシーンは有効化されていません。
 
-* On Completed
+#### On Completed
 シーンが有効化された際に呼び出されます。
 
 ### ロード画面の実装

@@ -9,9 +9,10 @@
 Scene System is a library that provides functions related to scene management in Unity.
 This library includes an API for loading scenes and a function that enables scene settings on the editor.
 
-### feature
+### Features
 * API for multi-functional scene management that extends SceneManager
 * Add SceneReference that can set scene reference on Inspector
+* LoadingScreen component for easy implementation of loading screens
 * SceneContainer for efficient multi-scene management
 * Supports coroutines and async/await
 * Support UniRx/UniTask
@@ -167,7 +168,7 @@ public class SceneReferenceExample : MonoBehaviour
 }
 ```
 
-<img src="https://github.com/AnnulusGames/SceneSystem/blob/main/Assets/SceneSystem/Documentation~/img1.png" width="350">
+<img src="https://github.com/AnnulusGames/SceneSystem/blob/main/Assets/SceneSystem/Documentation~/img1.png" width="420">
 
 ## LoadSceneOperationHandle
 All asynchronous methods in the Scene System have a structure called LoadSceneOperationHandle as a return value.
@@ -245,7 +246,7 @@ Scene System provides the LoadingScreen component as a function to display the l
 You can create your own loading screen by customizing the LoadingScreen component.
 
 ### Settings
-* Skip Mode
+#### Skip Mode
 Set the behavior when loading is completed.
 
 | SkipMode         | Behavior                                                                    |
@@ -261,20 +262,20 @@ LoadingScreen loadingScreen;
 loadingScreen.AllowCompletion();
 ```
 
-* Minimum Loading Time
+#### Minimum Loading Time
 Set the minimum amount of time it takes to load.
 Even if the loading of the scene is completed, it is possible to pretend that the loading is being performed for the set time.
 
-* Destroy On Completed
+#### Destroy On Completed
 If set to true, automatically remove the object after the scene transition is complete.
 
-* On Loading
+#### On Loading
 Called every frame while the scene is loading.
 
-* On Load Completed
+#### On Load Completed
 Called when the scene has finished loading. The scene is not activated at this point.
 
-* On Completed
+#### On Completed
 Called when the scene is activated.
 
 ### Loading Screen Implementation
