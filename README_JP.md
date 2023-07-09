@@ -238,6 +238,98 @@ yield return handle.ToYieldInteraction();
 AllowSceneActivationをfalseに設定した際のProgressやIsDone値などの挙動に関しては、UnityのallowSceneActivationに準拠します。
 https://docs.unity3d.com/2019.4/Documentation/ScriptReference/AsyncOperation-allowSceneActivation.html
 
+## LoadingScreen
+Scene Systemでは、ロード画面を表示する機能としてLoadingScreenコンポーネントが用意されています。
+
+<img src="https://github.com/AnnulusGames/SceneSystem/blob/main/Assets/SceneSystem/Documentation~/img2.png" width="500">
+
+LoadingScreenコンポーネントをカスタマイズすることで、独自のロード画面を作成できます。
+
+### 設定項目
+* Skip Mode
+ロード完了時の挙動を設定します。
+
+|  SkipMode         |  設定時の挙動                                                  |
+| ----------------- | ------------------------------------------------------------ |
+|  Instant Complete |  ロード完了後すぐに次のシーンを有効化します。                        |
+|  Any Key          |  ロード完了後、任意のキーが押されたタイミングで次のシーンを有効化します。 |
+|  Manual           |  ロード完了後、Scriptから手動で次のシーンを有効化します。             |
+
+Manualに設定した場合、AllowCompletion()を呼び出すことで次のシーンを有効化できます。
+
+```cs
+LoadingScreen loadingScreen;
+loadingScreen.AllowCompletion();
+```
+
+* Minimum Loading Time
+ロードにかかる最小限の時間を設定します。
+シーンのロードが完了しても、設定された時間の間はロードが行われているように見せかけることが可能です。
+
+* Destroy On Completed
+trueに設定した場合、シーン遷移が完了した後に自動でオブジェクトを削除します。
+
+* On Loading
+シーンのロード中に毎フレーム呼び出されます。
+
+* On Load Completed
+シーンのロードが完了した際に呼び出されます。この時点でシーンは有効化されていません。
+
+* On Completed
+シーンが有効化された際に呼び出されます。
+
+### ロード画面の実装
+LoadingScreenで作成したロード画面を使用するには、WithLoadingScreenメソッドを利用します。このメソッドはLoadSceneOperationHandleの拡張メソッドとして定義されており、Scene Systemの任意の非同期メソッドに対して利用することができます。
+
+```cs
+using UnityEngine;
+using AnnulusGames.SceneSystem;
+
+public sealed class LoadingScreenSample : MonoBehaviour
+{
+    public LoadingScreen loadingScreenPrefab;
+
+    public void Load()
+    {
+        // ロード画面のPrefabを生成し、DontDestroyOnLoadに設定
+        var loadingScreen = Instantiate(loadingScreenPrefab);
+        DontDestroyOnLoad(loadingScreen);
+
+        // WithLoadingScreenで生成したloadingScreenを渡す
+        Scenes.LoadSceneAsync("SceneName")
+            .WithLoadingScreen(loadingScreen);
+    }
+}
+```
+
+注意として、LoadingScreenを設定したLoadSceneOperationHandleに対してはAllowSceneActivationを呼び出さないでください。LoadingScreen側でallowSceneActivationを操作するため、予期しない動作を引き起こす可能性があります。
+
+### LoadingScreenを拡張する
+LoadingScreenを継承して独自のクラスを作成することも可能です。
+
+```cs
+using UnityEngine;
+using AnnulusGames.SceneSystem;
+
+public class CustomLoadingScreen : LoadingScreen
+{
+    public override void OnCompleted()
+    {
+        Debug.Log("completed");
+    }
+
+    public override void OnLoadCompleted()
+    {
+        Debug.Log("load completed");
+    }
+
+    public override void OnLoading(float progress)
+    {
+        Debug.Log("loading...");
+    }
+}
+```
+
 ## SceneContainer
 Unityでマルチシーンを利用したプロジェクト構成を採用する場合には何らかの方法で複数シーンの遷移を実装する必要があります。Scene Systemでは、そのような複雑なシーン遷移を行うための機能としてSceneContainerクラスが提供されています。
 
@@ -380,10 +472,6 @@ async UniTaskVoid ExampleAsync()
     await Scenes.LoadAsync("SceneName").ToUniTask();
 }
 ```
-
-## 実験的機能
-AnnulusGames.SceneSystem.Experimental以下には現在開発中のクラスが置かれています。
-これらの機能を使用することは可能ですが、予告なく破壊的変更が行われる可能性があるため、正式に公開されるまで使用しないことをお勧めします。
 
 ## ライセンス
 
