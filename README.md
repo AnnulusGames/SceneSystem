@@ -283,7 +283,7 @@ The history of scenes is stacked, and it is possible to return to the previous s
 
 ``` cs
 // Transition to the scene associated with the registered Key
-var handle = container. Push("Page1");
+var handle = container.Push("Page1");
 yield return handle.ToYieldInteraction();
 
 // return to previous scene
