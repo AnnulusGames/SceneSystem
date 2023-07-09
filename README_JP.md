@@ -192,10 +192,7 @@ handle.onCompleted += () =>
 
 ```cs
 var handle = Scenes.LoadSceneAsync("SceneName");
-handle.onCompleted += () =>
-{
-    Debug.Log("completed");
-};
+yield return handle.ToYieldInteraction();
 ```
 
 async/awaitで待機したい場合には、ToTaskメソッドを利用します。

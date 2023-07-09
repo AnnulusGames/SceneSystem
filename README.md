@@ -191,10 +191,7 @@ To wait in a coroutine, use the ToYieldInteraction method.
 
 ``` cs
 var handle = Scenes.LoadSceneAsync("SceneName");
-handle.onCompleted += () =>
-{
-     Debug.Log("completed");
-};
+yield return handle.ToYieldInteraction();
 ```
 
 To wait with async/await, use the ToTask method.
