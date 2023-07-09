@@ -331,6 +331,12 @@ public class CustomLoadingScreen : LoadingScreen
 }
 ```
 
+### サンプル
+LoadingScreenを用いたロード画面の実装のサンプルが用意されており、Package ManagerのSamplesから導入することが可能です。
+実際にロード画面を作成する際に参考にしてみてください。
+
+<img src="https://github.com/AnnulusGames/SceneSystem/blob/main/Assets/SceneSystem/Documentation~/img3.png" width="500">
+
 ## SceneContainer
 Unityでマルチシーンを利用したプロジェクト構成を採用する場合には何らかの方法で複数シーンの遷移を実装する必要があります。Scene Systemでは、そのような複雑なシーン遷移を行うための機能としてSceneContainerクラスが提供されています。
 

@@ -313,22 +313,28 @@ using AnnulusGames.SceneSystem;
 
 public class CustomLoadingScreen : LoadingScreen
 {
-     public override void OnCompleted()
-     {
-         Debug.Log("completed");
-     }
+    public override void OnCompleted()
+    {
+        Debug.Log("completed");
+    }
 
-     public override void OnLoadCompleted()
-     {
-         Debug.Log("load completed");
-     }
+    public override void OnLoadCompleted()
+    {
+        Debug.Log("load completed");
+    }
 
-     public override void OnLoading(float progress)
-     {
-         Debug.Log("loading...");
-     }
+    public override void OnLoading(float progress)
+    {
+        Debug.Log("loading...");
+    }
 }
 ```
+
+### Sample
+A loading screen implementation sample using LoadingScreen is available and can be installed from Package Manager/Samples.
+Please refer to it when you actually create a loading screen.
+
+<img src="https://github.com/AnnulusGames/SceneSystem/blob/main/Assets/SceneSystem/Documentation~/img3.png" width="500">
 
 ## SceneContainer
 When adopting a project structure that uses multiple scenes in Unity, it is necessary to implement the transition of multiple scenes in some way. Scene System provides the SceneContainer class as a function for performing such complex scene transitions.
