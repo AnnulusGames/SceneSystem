@@ -1,6 +1,8 @@
 # Scene System
  Provides efficient and versatile scene management functionality for Unity.
 
+<img src="https://github.com/AnnulusGames/SceneSystem/blob/main/Assets/SceneSystem/Documentation~/Header.png" width="800">
+
 [![license](https://img.shields.io/badge/LICENSE-MIT-green.svg)](LICENSE)
 
 [English README](README.md)
