@@ -24,7 +24,7 @@ namespace AnnulusGames.SceneSystem.LoadSceneOperations
                 {
                     if (this.IsDone) this.onCompleted?.Invoke();
                 };
-                operation.Execute();
+                if (!operation.HasExecuted) operation.Execute();
             }
 
             return new LoadSceneOperationHandle(this);
