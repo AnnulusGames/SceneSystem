@@ -1,0 +1,34 @@
+{
+    "name": "AnnulusGames.SceneSystem",
+    "rootNamespace": "",
+    "references": [
+        "GUID:560b04d1a97f54a4e82edc0cbbb69285",
+        "GUID:f51ebe6a0ceec4240a699833d6309b23",
+        "GUID:75469ad4d38634e559750d17036d5f7c"
+    ],
+    "includePlatforms": [],
+    "excludePlatforms": [],
+    "allowUnsafeCode": false,
+    "overrideReferences": false,
+    "precompiledReferences": [],
+    "autoReferenced": true,
+    "defineConstraints": [],
+    "versionDefines": [
+        {
+            "name": "com.neuecc.unirx",
+            "expression": "",
+            "define": "SCENESYSTEM_SUPPORT_UNIRX"
+        },
+        {
+            "name": "com.cysharp.unitask",
+            "expression": "",
+            "define": "SCENESYSTEM_SUPPORT_UNITASK"
+        },
+        {
+            "name": "com.unity.inputsystem",
+            "expression": "",
+            "define": "SCENESYSTEM_SUPPORT_INPUTSYSTEM"
+        }
+    ],
+    "noEngineReferences": false
+}
