@@ -10,5 +10,12 @@
   "author": {
     "name": "Annulus Games",
     "url": "https://github.com/AnnulusGames"
-  }
+  },
+  "samples": [
+    {
+      "displayName": "Loading Screen Sample",
+      "description": "This is a sample of loading screen implementation using LoadingScreen component. \n\nNote: Plaese add the two scenes included in the sample to Build Settings before running the sample.",
+      "path": "Samples~/LoadingScreenSample"
+    }
+  ]
 }

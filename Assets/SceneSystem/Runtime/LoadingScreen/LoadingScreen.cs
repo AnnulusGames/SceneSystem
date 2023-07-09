@@ -5,10 +5,10 @@ using UnityEngine.Events;
 using UnityEngine.InputSystem;
 #endif
 
-namespace AnnulusGames.SceneSystem.Experimental
+namespace AnnulusGames.SceneSystem
 {
-    [AddComponentMenu("Scene System/Loading Screen (Experimental)")]
-    public class LoadingScreen : MonoBehaviour, ILoadingScreen
+    [AddComponentMenu("Scene System/Loading Screen")]
+    public class LoadingScreen : MonoBehaviour
     {
         [Header("Settings")]
         public LoadingActionSkipMode skipMode;
@@ -35,14 +35,14 @@ namespace AnnulusGames.SceneSystem.Experimental
 
         private Action onCompletedInternal;
 
-        public void Show(LoadSceneOperationHandle handle, Action onCompleted)
+        internal void Show(LoadSceneOperationHandle handle)
         {
             callOnCompleted = false;
             allowCompletion = false;
             startTime = Time.realtimeSinceStartup;
 
             this.handle = handle;
-            this.onCompletedInternal = onCompleted;
+            this.handle.AllowSceneActivation(false);
         }
 
         void Update()
@@ -119,7 +119,11 @@ namespace AnnulusGames.SceneSystem.Experimental
 
             if (allowCompletion)
             {
-                CallOnCompletedEvent();
+                handle.AllowSceneActivation(true);
+                handle.onCompleted += () =>
+                {
+                    CallOnCompletedEvent();
+                };
             }
         }
 
