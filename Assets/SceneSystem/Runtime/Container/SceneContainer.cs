@@ -334,6 +334,27 @@ namespace AnnulusGames.SceneSystem
             return handle;
         }
 
+        public void StackActiveScenes(string key)
+        {
+            if (!_container.TryGetValue(key, out var list))
+            {
+                list = new List<(int buildIndex, int order)>();
+                _container.Add(key, list);
+            }
+            else
+            {
+                throw new Exception();
+            }
+
+            for (int i = 0; i < SceneManager.sceneCount; i++)
+            {
+                var buildIndex = SceneManager.GetSceneAt(i).buildIndex;
+                if (_permanentScenes.Contains(buildIndex)) continue;
+                list.Add((buildIndex, 0));
+            }
+            _stack.Push(key);
+        }
+
         public void AddCallbackReceiver(ISceneContainerCallbackReceiver receiver)
         {
             ValidateDisposed();
