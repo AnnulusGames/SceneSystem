@@ -266,6 +266,9 @@ namespace AnnulusGames.SceneSystem
 
             handle.onCompleted += () =>
             {
+                var index = _container[key][0].buildIndex;
+                SceneManager.SetActiveScene(SceneManager.GetSceneByBuildIndex(index));
+
                 _isLoading = false;
                 CallOnAfterPush(key, exit);
             };
@@ -305,7 +308,11 @@ namespace AnnulusGames.SceneSystem
 
                 handle.onCompleted += () =>
                 {
-
+                    if (enter != null)
+                    {
+                        var index = _container[enter][0].buildIndex;
+                        SceneManager.SetActiveScene(SceneManager.GetSceneByBuildIndex(index));
+                    }
                     _isLoading = false;
                     CallOnAfterPop(enter, key);
                 };
