@@ -305,6 +305,7 @@ namespace AnnulusGames.SceneSystem
 
                 handle.onCompleted += () =>
                 {
+
                     _isLoading = false;
                     CallOnAfterPop(enter, key);
                 };
@@ -334,7 +335,7 @@ namespace AnnulusGames.SceneSystem
             return handle;
         }
 
-        public void StackActiveScenes(string key)
+        public void StackCurrentScenes(string key)
         {
             if (!_container.TryGetValue(key, out var list))
             {
